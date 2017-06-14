@@ -1,0 +1,13 @@
+:9000 {
+    root /app/data
+    gzip
+    basicauth / admin 123456
+    filemanager / {
+	show ./data
+	allow_new true
+	allow_edit true
+	allow_commands true
+	allow_command mv
+    }
+
+}
