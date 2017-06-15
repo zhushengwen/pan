@@ -27,14 +27,11 @@ function start_caddy(callback){
       if(ps.length == 0)
       {
         console.log('Start...');
-        exec('./caddy &',function(e, s, se) {
-          if(callback)callback();
+        exec('caddy',function(e, s, se) {
+          start_caddy();
         });
       }
-      else
-        {
-          if(callback)callback();
-        }
+      if(callback)callback();
     });
 }
 proxy.on('error', function (err) {
@@ -55,7 +52,15 @@ server = http.createServer(function (req, res) {
     }
    console.log(123456);
     start_caddy(function(){
-//
+          proxy.web(req, res, {
+            target: finalUrl,
+            agent: finalAgent,
+            headers: { host: parsedUrl.hostname },
+            prependPath: false,
+            xfwd : true,
+            hostRewrite: finalUrl.host,
+            protocolRewrite: parsedUrl.protocol
+        });
     });
 });
 
