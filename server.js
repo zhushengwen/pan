@@ -27,7 +27,7 @@ function start_caddy(callback){
       if(ps.length == 0)
       {
         console.log('Start...');
-        exec('./caddy',function(e, s, se) {
+        exec('./caddy &',function(e, s, se) {
           if(callback)callback();
         });
       }
@@ -53,16 +53,9 @@ server = http.createServer(function (req, res) {
     } else {
         finalAgent = http.globalAgent;
     }
+   console.log(123456);
     start_caddy(function(){
-          proxy.web(req, res, {
-        target: finalUrl,
-        agent: finalAgent,
-        headers: { host: parsedUrl.hostname },
-        prependPath: false,
-        xfwd : true,
-        hostRewrite: finalUrl.host,
-        protocolRewrite: parsedUrl.protocol
-    });
+//
     });
 });
 
