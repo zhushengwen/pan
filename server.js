@@ -27,7 +27,8 @@ function start_caddy(callback){
       if(ps.length == 0)
       {
         console.log('Start...');
-        exec('caddy',function(e, s, se) {
+        exec('./caddy',function(e, s, se) {
+          console.log('ReStart...');
           start_caddy();
         });
       }
