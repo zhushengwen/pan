@@ -51,7 +51,7 @@ server = http.createServer(function (req, res) {
     } else {
         finalAgent = http.globalAgent;
     }
-   console.log(123456);
+
     start_caddy(function(){
           proxy.web(req, res, {
             target: finalUrl,
