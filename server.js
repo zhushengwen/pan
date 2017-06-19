@@ -31,8 +31,9 @@ function start_caddy(callback){
           console.log('ReStart...');
           start_caddy();
         });
+        if(callback)setTimeout(callback,1000);
       }
-      if(callback)callback();
+      else if(callback)callback();
     });
 }
 proxy.on('error', function (err) {
@@ -51,7 +52,7 @@ server = http.createServer(function (req, res) {
     } else {
         finalAgent = http.globalAgent;
     }
-
+ 
     start_caddy(function(){
           proxy.web(req, res, {
             target: finalUrl,
